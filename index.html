@@ -16,17 +16,29 @@
       </div>
       <select class="cities"></select>
       <span class="temperature"></span>
+      <form action="#">
+         <input type="text" placeholder="Please enter city">
+         <input type="submit">
+     </form>
     </main>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script>
 
 
     $( document ).ready(function() {
+      var result;
+      var temperature;
+      $( "form" ).submit(function() {
+      ( result = $("input:first" ).val());
+      console.log(result)
 
-    var temperature;
-      $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=london",function(data){
+
+
+
+      $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=" + result ,function(data){
          temperature = Math.floor(data.main.temp - 272.15)
         $('.temperature').text(temperature);
+      });
       });
 
   });
