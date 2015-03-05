@@ -4,8 +4,12 @@
     <meta charset="utf-8">
     <title>Weather App</title>
     <link rel="stylesheet" href="css/weather-style.css">
+    <customHeaders>
+    <add name="Access-Control-Allow-Origin" value="*" />
+</customHeaders>
   </head>
   <body>
+
     <main class="shadow">
       <div class="icon snow">
         <img src="images/snow.svg">
@@ -15,16 +19,31 @@
     </main>
     <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
     <script>
-      var apiData = ["London", "Paris"];
-      var temperature = 22;
-      var weatherIcon = 'snow';
-      $.each(apiData, function(index, city) {
-        $('.cities').append(
-          $('<option></option>').val(city).html(city + " ⌄")
-        );
+
+
+    $( document ).ready(function() {
+
+    var temperature;
+      $.getJSON("http://api.openweathermap.org/data/2.5/weather?q=london",function(data){
+         temperature = Math.floor(data.main.temp - 272.15)
+        $('.temperature').text(temperature);
       });
-      $('.temperature').text(temperature);
-      $('img').attr('src', 'images/' + weatherIcon + '.svg')
+
+  });
+
+
+
+
+      // var weatherIcon = 'snow';
+      // $.each(apiData, function(index, city) {
+      //   $('.cities').append(
+      //     $('<option></option>').val(city).html(city + " ⌄")
+      //   );
+      // });
+      // $('.temperature').text(temperature);
+      // $('img').attr('src', 'images/' + weatherIcon + '.svg')
     </script>
   </body>
 </html>
+
+
